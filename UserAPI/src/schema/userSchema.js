@@ -7,6 +7,7 @@ export const typeDefs = `#graphql
 
     type Query {
         users: [User]
+        searchUsers(searchTerm: String!): [User]
     }
 
     type Mutation {
