@@ -11,5 +11,6 @@ export const typeDefs = `#graphql
 
     type Mutation {
         addUser(name: String!, email: String!): User
+        deleteUser(id: ID!): User
     }
 `
