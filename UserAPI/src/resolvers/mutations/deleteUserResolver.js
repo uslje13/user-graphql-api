@@ -1,12 +1,19 @@
-import db from '../../_db.js';
+import User from '../../model/user.js';
 
 export const deleteUserResolver = {
-    deleteUser(_, { id }) {
-        const index = db.users.findIndex(user => user.id === id);
-        if (index === -1) {
-            throw new Error(`User with id ${id} not found`);
+    async deleteUser(_, { id }) {
+        try {
+
+            const deletedUser = await User.findOneAndDelete({ _id: id });
+
+            if (!deletedUser) {
+                throw new Error(`User with id ${id} not found`);
+            }
+
+            return deletedUser;
+        } catch (error) {
+            console.error("Error deleting user:", error);
+            throw new Error("Failed to delete user");
         }
-        const deletedUser = db.users.splice(index, 1);
-        return deletedUser[0];
     },
 };
