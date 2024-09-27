@@ -3,6 +3,7 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { typeDefs } from "./schema/userSchema.js";
 import { getAllUsersResolver } from "./resolvers/queries/getAllUsersResolver.js";
+import { searchUsersResolver } from "./resolvers/queries/searchUsersResolver.js";
 import { addUserResolver } from "./resolvers/mutations/addUserResolver.js";
 import { deleteUserResolver } from "./resolvers/mutations/deleteUserResolver.js";
 import mongoose from "mongoose";
@@ -16,7 +17,10 @@ const PORT = process.env.PORT || 4000;
 const MONGO_URI = process.env.MONGO_URI;
 
 const resolvers = {
-    Query: getAllUsersResolver,
+    Query: {
+        ...getAllUsersResolver,
+        ...searchUsersResolver,
+    },
     Mutation: {
         ...addUserResolver,
         ...deleteUserResolver,
