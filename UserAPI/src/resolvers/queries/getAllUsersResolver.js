@@ -1,6 +1,13 @@
-import db from '../../_db.js'
+import User from '../../model/user.js';
+
 export const getAllUsersResolver = {
-    users() {
-        return db.users;
+    async users() {
+        try {
+            const users = await User.find();
+            return users;
+        } catch (error) {
+            console.error("Error fetching users:", error);
+            throw new Error("Failed to fetch users");
+        }
     },
 };

@@ -1,14 +1,10 @@
-import { v4 as uuidv4 } from 'uuid';
-import db from '../../_db.js';
+
+import User from '../../model/user.js';
 
 export const addUserResolver = {
-    addUser(_, { name, email }) {
-        const newUser = {
-            id: uuidv4(),
-            name,
-            email
-        };
-        db.users.push(newUser);
+    async addUser(_, { name, email }) {
+        const newUser = new User({ name, email });
+        await newUser.save();
         return newUser;
     },
 };

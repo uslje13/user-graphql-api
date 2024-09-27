@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'; 
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import { typeDefs } from "./schema.js";
+import { typeDefs } from "./schema/userSchema.js";
 import { getAllUsersResolver } from "./resolvers/queries/getAllUsersResolver.js";
 import { addUserResolver } from "./resolvers/mutations/addUserResolver.js";
 import { deleteUserResolver } from "./resolvers/mutations/deleteUserResolver.js";
